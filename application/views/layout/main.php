@@ -1,567 +1,1358 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        * {-webkit-font-smoothing: antialiased;}
-        #shadowbox {
-    position: fixed;
-    z-index: 9999999998;
-    height: 100%;
-    width: 100%;
-    background: rgba(0,0,0,0.5);
-}
+<head>
+  <meta charset="utf-8" />
+  <title>Daarul Abiddin E-Learning</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-/*#banner {
-    position: fixed;
-    z-index: 999;
-    top: 5%;
-    min-height: 400px;
-    background: #FFF;
-}*/
-@media (min-width: 768px) {
-    #banner {
-        width: 70%;
-        margin-left: 15%;
-        /*min-height:50%;*/
-        position:fixed;
-        z-index: 9999999999;
-        background: #FFF;
-        top: 5%;
-        overflow-y: scroll;
-        max-height:400px;
-    }
-    #closes {
-        width: 70%;
-        margin-left: 15%;
-        /*min-height:50%;*/
-        position:fixed;
-        z-index: 9999999999;
-        background: #FFF;
-        top: 0;
-        overflow-y: scroll;
-        max-height:400px;
-    }
-}
-@media (max-width: 767px) {
-    #banner {
-        width: 100%;
-        /*min-height:50%;*/
-        position:fixed;
-        z-index: 9999999999;
-        background: #FFF;
-        top: 5%;
-        overflow-y: scroll;
-        max-height:400px;
-    }
-    #closes {
-        width: 100%;
-        /*min-height:50%;*/
-        position:fixed;
-        z-index: 9999999999;
-        background: #FFF;
-        top: 0;
-        overflow-y: scroll;
-        max-height:400px;
-    }
-}
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="<?php echo base_url()?>assets/flatkit/assets/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="<?php echo base_url()?>assets/flatkit/assets/images/logo.png">
+  
+  <!-- style -->
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/material-design-icons/material-design-icons.css" type="text/css" />
 
-#close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    font-family: Arial, Helvetica;
-    font-size: 14px;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: #f44336;
-    padding: 10px;
-}
-        </style>
-<?php $this->load->view('layout/header')?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/slick/slick-theme.css"/>
-        <script type="text/javascript" src="<?php echo base_url()?>assets/slick/slick.min.js"></script>
-	<script>
-		jQuery(document).ready(function(){
-                    <?php $carimenu=GetValue('id_parents','sv_menu',array('filez'=>'where/'.$this->uri->segment(1)));
-                    $ai=$this->db->query("SELECT id_parents FROM sv_menu WHERE filez='".$this->uri->segment(1)."/".$this->uri->segment(2)."'");
-                    if($ai->num_rows()==0){
-                    $ai=$this->db->query("SELECT id_parents FROM sv_menu WHERE filez='".$this->uri->segment(1)."'");
-                    }
-                    $idnya=$ai->row_array();
-                     
-                    ?>
-			idmenu=parseInt(<?php echo $idnya['id_parents']?>);
-			childmenu=parseInt(<?php echo GetValue('id','sv_menu',array('filez'=>'where/'.$this->uri->segment(1)));?>);
-			renderside(idmenu);
-			rendermessage();
-			//setInterval("rendermessage()",100000 );
-			setTimeout(function() {
-                            $("#menuside"+childmenu).addClass("active");
-			}, 500);
-//                        $('#shadowbox').click(function(){
-//                            $('#shadowbox').fadeOut( "slow", function() {});
-//                            $('#banner').fadeOut( "slow", function() {});
-//                            $('#closes').fadeOut( "slow", function() {});
-//                        });
-			$('#close').click(function(){
-                            //$(this).parent().fadeOut( "slow", function() {});
-                            $('#closes').fadeOut( "slow", function() {});
-                            $('#shadowbox').fadeOut( "slow", function() {});
-                            $('#banner').fadeOut( "slow", function() {});
-                        });
-			function beforeCall(form, options){
-				//alert('oke');
-				if (window.console) 
-				console.log("Right before the AJAX form validation call");
-				return true;
-			}
-            
-			// Called once the server replies to the ajax form validation request
-			function ajaxValidationCallback(status, form, json, options){
-				if (window.console) 
-				console.log(status);
-                
-				if (status === true) {
-					alert('the form is valid!');
-					// uncomment these lines to submit the form to form.action
-					form.validationEngine('detach');
-					form.submit();
-					// or you may use AJAX again to submit the data
-				}
-			}
-			jQuery(document).ready(function(){
-                            $('.your-class').slick({ 
-                                dots: true,
-                                infinite: true,
-                                speed: 300,
-                                slidesToShow: 1,
-                                adaptiveHeight: true
-                            });
-                            <?php if($this->session->flashdata('pengumuman')=='ada'){ ?>
-				 $('#shadowbox').fadeIn( "slow", function() {});
-                                 $('#banner').fadeIn( "slow", function() {});
-                                 $('#closes').fadeIn( "slow", function() {});
-                            <?php }?>
-				//$('#kodeBar').focus();
-				// binds form submission and fields to the validation engine
-				jQuery("#form").validationEngine({
-					
-					/*ajaxFormValidation: true,
-						ajaxFormValidationMethod: 'post',
-					onAjaxFormComplete: ajaxValidationCallback*/
-					
-				});
-			});
-			
-		});
-		function renderside(id){
-			$("li[id^='menuutama']").removeClass("active");
-				id=parseInt(id);
-			$("#listside").empty();
-			//$("#listside").load("<?php echo base_url()?>load/renderdropdown/"+id);
-			$("#menuutama"+id).addClass("active");
-		}
-		function rendermessage(){
-				//$('#message').load("<?php echo base_url()?>load/rendermessage/");
-		}
-		function cobapindah(val){
-			if(val!='#'){
-				window.location.href ='<?php echo base_url()?>'+val;
-			}
-		}
-	</script>
-	<body class="no-skin">
-            
-            <div id="shadowbox" style="display:none"></div>
-            <div class="col-md-12" id="closes" style="height:50px; display:none">  
-                    <div id="close">X</div>
-                  </div>
-           
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css <?php echo base_url()?>assets/flatkit/assets/styles/app.min.css -->
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/styles/font.css" type="text/css" />
+</head>
+<body>
+  <div class="app" id="app">
 
-		<?php $this->load->view('layout/menu')?>
-		
+<!-- ############ LAYOUT START-->
 
-			
-		<?php $this->load->view($content);?>
-				
-			</div><!-- /.page-content -->
-		</div>
-	</div><!-- /.main-content --> 
-								
-			<div class="footer">
-				<div class="footer-inner">
-					<!-- #section:basics/footer -->
-					<div class="footer-content">
-						<span class="bigger-120">
-							<span class="blue bolder">Darul Abidin</span>
-							Application &copy; <?php echo date("Y")?>
-						</span>
+  <!-- aside -->
+  <div id="aside" class="app-aside modal fade folded md nav-expand">
+  	<div class="left navside indigo-900 dk" layout="column" style="width:12.5rem;">
+      <div class="navbar navbar-md no-radius" style="background:white!important;padding:2%;min-height:auto!important;height:85px;">
+        <!-- brand -->
+        <a class="navbar-brand">
+        	<img src="<?php echo base_url()?>assets/img/seahorse2.png" alt="." style="min-width:100%;max-width:100%;height:auto!important;max-height:180px!important;">
+        	<!--div ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/logo.svg'"></div>
+        	<img src="<?php echo base_url()?>assets/img/seahorse2.png" alt="." class="hide">
+        	<span class="hidden-folded inline">Flatkit</span-->
+        </a>
+        <!-- / brand -->
+      </div>
+      <div flex class="hide-scroll">
+        <nav class="scroll nav-active-primary">
+          
+            <ul class="nav" ui-nav>
+              <li class="nav-header hidden-folded">
+                <small class="text-muted">Main</small>
+              </li>
+              
+              <li>
+                <a href="dashboard.html" >
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe3fc;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_0.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Dashboard</span>
+                </a>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-label">
+                    <b class="label rounded label-sm primary">5</b>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe5c3;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_1.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Apps</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="inbox.html" >
+                      <span class="nav-text">Inbox</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="contact.html" >
+                      <span class="nav-text">Contacts</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="calendar.html" >
+                      <span class="nav-text">Calendar</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8f0;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_2.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Layouts</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="headers.html" >
+                      <span class="nav-text">Header</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="asides.html" >
+                      <span class="nav-text">Aside</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="footers.html" >
+                      <span class="nav-text">Footer</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          
+              <li>
+                <a href="widget.html" >
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8d2;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_3.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Widgets</span>
+                </a>
+              </li>
+          
+              <li class="nav-header hidden-folded">
+                <small class="text-muted">Components</small>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-label">
+                    <b class="label label-sm accent">8</b>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe429;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_4.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">UI kit</span>
+                </a>
+                <ul class="nav-sub nav-mega nav-mega-3">
+                  <li>
+                    <a href="arrow.html" >
+                      <span class="nav-text">Arrow</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="box.html" >
+                      <span class="nav-text">Box</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="button.html" >
+                      <span class="nav-text">Button</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="color.html" >
+                      <span class="nav-text">Color</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="dropdown.html" >
+                      <span class="nav-text">Dropdown</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="grid.html" >
+                      <span class="nav-text">Grid</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="icon.html" >
+                      <span class="nav-text">Icon</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="label.html" >
+                      <span class="nav-text">Label</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="list.html" >
+                      <span class="nav-text">List Group</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="modal.html" >
+                      <span class="nav-text">Modal</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="nav.html" >
+                      <span class="nav-text">Nav</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="progress.html" >
+                      <span class="nav-text">Progress</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="social.html" >
+                      <span class="nav-text">Social</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="sortable.html" >
+                      <span class="nav-text">Sortable</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="streamline.html" >
+                      <span class="nav-text">Streamline</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="timeline.html" >
+                      <span class="nav-text">Timeline</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="map.vector.html" >
+                      <span class="nav-text">Vector Map</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-label"><b class="label no-bg">9</b></span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe3e8;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_5.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Pages</span>
+                </a>
+                <ul class="nav-sub nav-mega">
+                  <li>
+                    <a href="profile.html" >
+                      <span class="nav-text">Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="setting.html" >
+                      <span class="nav-text">Setting</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="search.html" >
+                      <span class="nav-text">Search</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="faq.html" >
+                      <span class="nav-text">FAQ</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="gallery.html" >
+                      <span class="nav-text">Gallery</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="invoice.html" >
+                      <span class="nav-text">Invoice</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="price.html" >
+                      <span class="nav-text">Price</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="blank.html" >
+                      <span class="nav-text">Blank</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="signin.html" >
+                      <span class="nav-text">Sign In</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="signup.html" >
+                      <span class="nav-text">Sign Up</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="forgot-password.html" >
+                      <span class="nav-text">Forgot Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="lockme.html" >
+                      <span class="nav-text">Lockme Screen</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="404.html" >
+                      <span class="nav-text">Error 404</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="505.html" >
+                      <span class="nav-text">Error 505</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe39e;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_6.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Form</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="form.layout.html" >
+                      <span class="nav-text">Form Layout</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.element.html" >
+                      <span class="nav-text">Form Element</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.validation.html" >
+                      <span class="nav-text">Form Validation</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.select.html" >
+                      <span class="nav-text">Select</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.editor.html" >
+                      <span class="nav-text">Editor</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.picker.html">
+                      <span class="nav-text">Picker</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.wizard.html">
+                      <span class="nav-text">Wizard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.dropzone.html" class="no-ajax" >
+                      <span class="nav-text">File Upload</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe896;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_7.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Tables</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="static.html" >
+                      <span class="nav-text">Static table</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="datatable.html" >
+                      <span class="nav-text">Datatable</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="footable.html" >
+                      <span class="nav-text">Footable</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-label hidden-folded">
+                    <b class="label label-sm info">N</b>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe1b8;
+                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_8.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text">Charts</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="chart.html" >
+                      <span class="nav-text">Chart</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="nav-caret">
+                        <i class="fa fa-caret-down"></i>
+                      </span>
+                      <span class="nav-text">Echarts</span>
+                    </a>
+                    <ul class="nav-sub">
+                      <li>
+                        <a href="echarts-line.html" >
+                          <span class="nav-text">line</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-bar.html" >
+                          <span class="nav-text">Bar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-pie.html" >
+                          <span class="nav-text">Pie</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-scatter.html" >
+                          <span class="nav-text">Scatter</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-radar-chord.html" >
+                          <span class="nav-text">Radar &amp; Chord</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-gauge-funnel.html" >
+                          <span class="nav-text">Gauges &amp; Funnel</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="echarts-map.html" >
+                          <span class="nav-text">Map</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+          
+              <li class="nav-header hidden-folded">
+                <small class="text-muted">Help</small>
+              </li>
+              
+              <li class="hidden-folded" >
+                <a href="docs.html" >
+                  <span class="nav-text">Documents</span>
+                </a>
+              </li>
+          
+            </ul>
+        </nav>
+      </div>
+      <div flex-no-shrink>
+          <?php $this->load->view('layout/flatkit/bottom-side')?>
+        <!--div ui-include="'<?php echo base_url()?>assets/flatkit/views/blocks/aside.bottom.0.html'"></div-->
+      </div>
+    </div>
+  </div>
+  <!-- / aside -->
+  
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow navbar-md">
+        <div class="navbar">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+        
+            <!-- Page title - Bind to $state's title -->
+            <div class="navbar-item pull-left h5" ng-bind="$state.current.data.title" id="pageTitle"></div>
+        
+            <!-- navbar right -->
+            <ul class="nav navbar-nav pull-right">
+              <!--li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link" href data-toggle="dropdown">
+                  <i class="material-icons">&#xe7f5;</i>
+                  <span class="label label-sm up warn">3</span>
+                </a>
+                <div ui-include="'<?php echo base_url()?>assets/flatkit/views/blocks/dropdown.notification.html'"></div>
+              </li-->
+              <li class="nav-item dropdown">
+                <a class="nav-link clear" href data-toggle="dropdown">
+                  <span class="avatar w-32">
+                    <img src="<?php echo base_url()?>assets/flatkit/assets/images/a0.jpg" alt="...">
+                    <i class="on b-white bottom"></i>
+                  </span>
+                </a>
+                <div ui-include="'<?php echo base_url()?>assets/flatkit/views/blocks/dropdown.user.html'"></div>
+              </li>
+              <li class="nav-item hidden-md-up">
+                <a class="nav-link" data-toggle="collapse" data-target="#collapse">
+                  <i class="material-icons">&#xe5d4;</i>
+                </a>
+              </li>
+            </ul>
+            <!-- / navbar right -->
+        
+            <!-- navbar collapse -->
+            <div class="collapse navbar-toggleable-sm" id="collapse">
+              <!-- link and dropdown -->
+              <ul class="nav navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link" href data-toggle="dropdown">
+                    <i class="fa fa-fw fa-plus text-muted"></i>
+                    <span>Switch Students</span>
+                  </a>
+                  <div ui-include="'<?php echo base_url()?>assets/flatkit/views/blocks/dropdown.new.html'"></div>
+                </li>
+              </ul>
+              <!-- / -->
+            </div>
+            <!-- / navbar collapse -->
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-a text-xs">
+        <div class="pull-right text-muted">
+          &copy; Copyright <strong>Darul Abidin</strong> <?php echo date('Y')?><span class="hidden-xs-down"></span>
+          <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+        </div>
+        <!--div class="nav">
+          <a class="nav-link" href="../">About</a>
+          <span class="text-muted">-</span>
+          <a class="nav-link label accent" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+        </div-->
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
 
-						&nbsp; &nbsp;
-						<!--span class="action-buttons">
-							<a href="#">
-								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-							</a>
-						</span-->
+<!-- ############ PAGE START-->
+<div class="padding">
+    <?php $this->load->view($content);?>
+	<!--<div class="margin">
+		<h5 class="m-b-0 _300">Hi Jone, Welcome back</h5>
+		<small class="text-muted">Awesome uikit for your next project</small>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-5 col-lg-4">
+			<div class="row">
+				<div class="col-xs-6">
+			        <div class="box p-a">
+			          <div class="pull-left m-r">
+			          	<i class="fa fa-heart text-2x text-danger m-y-sm"></i>
+			          </div>
+			          <div class="clear">
+			          	<div class="text-muted">Likes</div>
+			            <h4 class="m-a-0 text-md _600"><a href>7530</a></h4>
+			          </div>
+			        </div>
+			    </div>
+			    <div class="col-xs-6">
+			        <div class="box p-a">
+			          <div class="pull-left m-r">
+			          	<i class="fa fa-comments text-2x text-info m-y-sm"></i>
+			          </div>
+			          <div class="clear">
+			          	<div class="text-muted">Comments</div>
+			            <h4 class="m-a-0 text-md _600"><a href>2980</a></h4>
+			          </div>
+			        </div>
+			    </div>
+			    <div class="col-xs-6">
+			        <div class="box p-a">
+			          <div class="pull-left m-r">
+			          	<i class="fa fa-photo text-2x text-accent m-y-sm"></i>
+			          </div>
+			          <div class="clear">
+			          	<div class="text-muted">Photos</div>
+			            <h4 class="m-a-0 text-md _600"><a href>630</a></h4>
+			          </div>
+			        </div>
+			    </div>
+			    <div class="col-xs-6">
+			        <div class="box p-a">
+			          <div class="pull-left m-r">
+			          	<i class="fa fa-video-camera text-2x text-success m-y-sm"></i>
+			          </div>
+			          <div class="clear">
+			          	<div class="text-muted">Videos</div>
+			            <h4 class="m-a-0 text-md _600"><a href>750</a></h4>
+			          </div>
+			        </div>
+			    </div>
+			    <div class="col-xs-12">
+			        <div class="row-col box-color text-center primary">
+			          <div class="row-cell p-a">
+			            Followers
+			            <h4 class="m-a-0 text-md _600"><a href>2350</a></h4>
+			          </div>
+			          <div class="row-cell p-a dker">
+			            Following
+			            <h4 class="m-a-0 text-md _600"><a href>7250</a></h4>
+			          </div>
+			        </div>
+			    </div>
+		    </div>
+	    </div>
+	    <div class="col-sm-12 col-md-7 col-lg-8">
+	    	<div class="row-col box dark bg">
+		        <div class="col-sm-8">
+	        		<div class="box-header">
+			          <h3>Activities</h3>
+			          <small>Your last activity is posted 4 hours ago</small>
+			        </div>
+			        <div class="box-body">
+			            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
+			              [
+			                { 
+			                  data: [[1, 6.1], [2, 6.3], [3, 6.4], [4, 6.6], [5, 7.0], [6, 7.7], [7, 8.3]], 
+			                  points: { show: true, radius: 0}, 
+			                  splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 } 
+			                },
+			                { 
+			                  data: [[1, 5.5], [2, 5.7], [3, 6.4], [4, 7.0], [5, 7.2], [6, 7.3], [7, 7.5]], 
+			                  points: { show: true, radius: 0}, 
+			                  splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 } 
+			                }
+			              ], 
+			              {
+			                colors: ['#0cc2aa','#fcc100'],
+			                series: { shadowSize: 3 },
+			                xaxis: { show: true, font: { color: '#ccc' }, position: 'bottom' },
+			                yaxis:{ show: true, font: { color: '#ccc' }},
+			                grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'rgba(120,120,120,0.5)' },
+			                tooltip: true,
+			                tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
+			              }
+			            " style="height:162px" >
+			            </div>
+			        </div>
+		        </div>
+		        <div class="col-sm-4 dker">
+					<div class="box-header">
+						<h3>Reports</h3>
 					</div>
-
-					<!-- /section:basics/footer -->
+					<div class="box-body">
+						<p class="text-muted">Dales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
+						<a href class="btn btn-sm btn-outline rounded b-success">Read More</a>
+					</div>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="col-md-12 col-xl-4">
+	        <div class="box">
+	          <div class="box-header">
+	            <h3>Your tasks</h3>
+	            <small>Calculated in last 7 days</small>
+	          </div>
+	          <div class="box-tool">
+		        <ul class="nav">
+		          <li class="nav-item inline">
+		            <a class="nav-link">
+		              <i class="material-icons md-18">&#xe863;</i>
+		            </a>
+		          </li>
+		          <li class="nav-item inline dropdown">
+		            <a class="nav-link" data-toggle="dropdown">
+		              <i class="material-icons md-18">&#xe5d4;</i>
+		            </a>
+		            <div class="dropdown-menu dropdown-menu-scale pull-right">
+		              <a class="dropdown-item" href>This week</a>
+		              <a class="dropdown-item" href>This month</a>
+		              <a class="dropdown-item" href>This week</a>
+		              <div class="dropdown-divider"></div>
+		              <a class="dropdown-item">Today</a>
+		            </div>
+		          </li>
+		        </ul>
+		      </div>
+	          <div class="text-center b-t">
+	            <div class="row-col">
+	              <div class="row-cell p-a">
+	                <div class="inline m-b">
+	                  <div ui-jp="easyPieChart" class="easyPieChart" ui-refresh="app.setting.color" data-redraw='true' data-percent="55" ui-options="{
+	                      lineWidth: 8,
+	                      trackColor: 'rgba(0,0,0,0.05)',
+	                      barColor: '#0cc2aa',
+	                      scaleColor: 'transparent',
+	                      size: 100,
+	                      scaleLength: 0,
+	                      animate:{
+	                        duration: 3000,
+	                        enabled:true
+	                      }
+	                    }">
+	                    <div>
+	                      <h5>55%</h5>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div>
+	                	Finished
+	                	<small class="block m-b">320</small>
+	                	<a href class="btn btn-sm white rounded">Manage</a>
+	                </div>
+	              </div>
+	              <div class="row-cell p-a dker">
+	                <div class="inline m-b">
+	                  <div ui-jp="easyPieChart" class="easyPieChart" ui-refresh="app.setting.color" data-redraw='true' data-percent="45" ui-options="{
+	                      lineWidth: 8,
+	                      trackColor: 'rgba(0,0,0,0.05)',
+	                      barColor: '#fcc100',
+	                      scaleColor: 'transparent',
+	                      size: 100,
+	                      scaleLength: 0,
+	                      animate:{
+	                        duration: 3000,
+	                        enabled:true
+	                      }
+	                    }">
+	                    <div>
+	                      <h5>45%</h5>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div>
+	                	Remaining
+	                	<small class="block m-b">205</small>
+	                	<a href class="btn btn-sm white rounded">Manage</a>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	    <div class="col-md-6 col-xl-4">
+	    	<div class="box">
+	          <div class="box-header">
+	            <h3>Your projects</h3>
+	            <small>Calculated in last 30 days</small>
+	          </div>
+	          <div class="box-tool">
+		        <ul class="nav">
+		          <li class="nav-item inline">
+		            <a class="nav-link">
+		              <i class="material-icons md-18">&#xe863;</i>
+		            </a>
+		          </li>
+		          <li class="nav-item inline dropdown">
+		            <a class="nav-link" data-toggle="dropdown">
+		              <i class="material-icons md-18">&#xe5d4;</i>
+		            </a>
+		            <div class="dropdown-menu dropdown-menu-scale pull-right">
+		              <a class="dropdown-item" href>This week</a>
+		              <a class="dropdown-item" href>This month</a>
+		              <a class="dropdown-item" href>This week</a>
+		              <div class="dropdown-divider"></div>
+		              <a class="dropdown-item">Today</a>
+		            </div>
+		          </li>
+		        </ul>
+		      </div>
+	          <div class="box-body">
+	            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
+	              [
+	                { data: [[1, 3], [2, 2.6], [3, 3.2], [4, 3], [5, 3.5], [6, 3], [7, 3.5]], 
+	                  points: { show: true, radius: 0}, 
+                  	  splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0.2 } 
+	                },
+	                { data: [[1, 3.6], [2, 3.5], [3, 6], [4, 4], [5, 4.3], [6, 3.5], [7, 3.6]], 
+	                  points: { show: true, radius: 0}, 
+                  	  splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0.1 } 
+	                }
+	              ], 
+	              {
+	                colors: ['#fcc100','#0cc2aa'],
+	                series: { shadowSize: 3 },
+	                xaxis: { show: true, font: { color: '#ccc' }, position: 'bottom' },
+	                yaxis:{ show: true, font: { color: '#ccc' },  min: 2},
+	                grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'rgba(120,120,120,0.5)' },
+	                tooltip: true,
+	                tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
+	              }
+	            " style="height:200px" >
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	    <div class="col-md-6 col-xl-4">
+	        <div class="box">
+	          <div class="box-header">
+	            <h3>Your Sales</h3>
+	            <small>A general overview of your sales</small>
+	          </div>
+	          <div class="box-tool">
+		        <ul class="nav">
+		          <li class="nav-item inline">
+		            <a class="nav-link">
+		              <i class="material-icons md-18">&#xe863;</i>
+		            </a>
+		          </li>
+		          <li class="nav-item inline dropdown">
+		            <a class="nav-link" data-toggle="dropdown">
+		              <i class="material-icons md-18">&#xe5d4;</i>
+		            </a>
+		            <div class="dropdown-menu dropdown-menu-scale pull-right">
+		              <a class="dropdown-item" href>This week</a>
+		              <a class="dropdown-item" href>This month</a>
+		              <a class="dropdown-item" href>This week</a>
+		              <div class="dropdown-divider"></div>
+		              <a class="dropdown-item">Today</a>
+		            </div>
+		          </li>
+		        </ul>
+		      </div>
+	          <div class="box-body">
+	            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
+	              [
+	                { data: [[1, 2], [2, 4], [3, 5], [4, 7], [5, 6], [6, 4], [7, 5], [8, 4]] },
+	                { data: [[1, 2], [2, 3], [3, 2], [4, 5], [5, 4], [6, 3], [7, 4], [8, 2]] }
+	              ], 
+	              {
+	                bars: { show: true, fill: true,  barWidth: 0.3, lineWidth: 2, order: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.2}] }, align: 'center'},
+	                colors: ['#0cc2aa','#fcc100'],
+	                series: { shadowSize: 3 },
+	                xaxis: { show: true, font: { color: '#ccc' }, position: 'bottom' },
+	                yaxis:{ show: true, font: { color: '#ccc' }},
+	                grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'rgba(120,120,120,0.5)' },
+	                tooltip: true,
+	                tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
+	              }
+	            " style="height:200px" >
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="col-md-6 col-xl-4">
+	        <div class="box light lt">
+	            <div class="box-header">
+	              <span class="label success pull-right">52</span>
+	              <h3>Members</h3>
+	            </div>
+	            <ul class="list no-border p-b">
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                	<span class="w-40 avatar danger">
+		                  <span>C</span>
+		                  <i class="on b-white bottom"></i>
+		                </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Chris Fox</a></div>
+	                  <small class="text-muted text-ellipsis">Designer, Blogger</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar purple">
+		                  <span>M</span>
+		                  <i class="on b-white bottom"></i>
+		              </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Mogen Polish</a></div>
+	                  <small class="text-muted text-ellipsis">Writter, Mag Editor</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar info">
+		                  <span>J</span>
+		                  <i class="off b-white bottom"></i>
+		              </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Joge Lucky</a></div>
+	                  <small class="text-muted text-ellipsis">Art director, Movie Cut</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar warning">
+		                  <span>F</span>
+		                  <i class="on b-white bottom"></i>
+		              </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Folisise Chosielie</a></div>
+	                  <small class="text-muted text-ellipsis">Musician, Player</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                	<span class="w-40 avatar success">
+		                  <span>P</span>
+		                  <i class="away b-white bottom"></i>
+		                </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Peter</a></div>
+	                  <small class="text-muted text-ellipsis">Musician, Player</small>
+	                </div>
+	              </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="col-md-6 col-xl-4">
+			<div class="box">
+				<div class="box-header">
+					<h3>Tasks</h3>
+					<small>20 finished, 5 remaining</small>
 				</div>
+				<div class="box-tool">
+			        <ul class="nav">
+			          <li class="nav-item inline dropdown">
+			            <a class="nav-link text-muted p-x-xs" data-toggle="dropdown">
+			              <i class="fa fa-ellipsis-v"></i>
+			            </a>
+			            <div class="dropdown-menu dropdown-menu-scale pull-right">
+			              <a class="dropdown-item" href>New task</a>
+			              <a class="dropdown-item" href>Make all finished</a>
+			              <a class="dropdown-item" href>Make all unfinished</a>
+			              <div class="dropdown-divider"></div>
+			              <a class="dropdown-item">Settings</a>
+			            </div>
+			          </li>
+			        </ul>
+			    </div>
+				<div class="box-body">
+				  	<div class="streamline b-l m-l">
+				        <div class="sl-item b-success">
+				          <div class="sl-icon">
+				            <i class="fa fa-check"></i>
+				          </div>
+				          <div class="sl-content">
+				            <div class="sl-date text-muted">8:30</div>
+				            <div>Call to customer <a href class="text-info">Jacob</a> and discuss the detail about the AP project.</div>
+				          </div>
+				        </div>
+				        <div class="sl-item b-info">
+				          <div class="sl-content">
+				            <div class="sl-date text-muted">Sat, 5 Mar</div>
+				            <div>Prepare for presentation</div>
+				          </div>
+				        </div>
+				        <div class="sl-item b-warning">
+				          <div class="sl-content">
+				            <div class="sl-date text-muted">Sun, 11 Feb</div>
+				            <div><a href class="text-info">Jessi</a> assign you a task <a href class="text-info">Mockup Design</a>.</div>
+				          </div>
+				        </div>
+				    </div>
+				</div>
+			  	<div class="box-footer">
+			  		<a href class="btn btn-sm btn-outline b-info rounded text-u-c pull-right">Add one</a>
+			  		<a href class="btn btn-sm white text-u-c rounded">More</a>
+			  	</div>
+		  	</div>
+		</div>
+	    <div class="col-md-12 col-xl-4">
+	    	<div class="box">
+				<div class="box-header">
+					<span class="label success pull-right">5</span>
+					<h3>Activity</h3>
+					<small>10 members update their activies.</small>
+				</div>
+				<div class="box-body">
+				  	<div class="streamline b-l m-b m-l">
+		              <div class="sl-item">
+		                <div class="sl-left">
+		                  <img src="<?php echo base_url()?>assets/flatkit/assets/images/a2.jpg" class="img-circle">
+		                </div>
+		                <div class="sl-content">
+		                  <a href class="text-info">Louis Elliott</a><span class="m-l-sm sl-date">5 min ago</span>
+		                  <div>assign you a task <a href class="text-info">Mockup Design</a>.</div>
+		                </div>
+		              </div>
+		              <div class="sl-item">
+		                <div class="sl-left">
+		                  <img src="<?php echo base_url()?>assets/flatkit/assets/images/a5.jpg" class="img-circle">
+		                </div>
+		                <div class="sl-content">
+		                  <a href class="text-info">Terry Moore</a><span class="m-l-sm sl-date">10 min ago</span>
+		                  <div>Follow up to close deal</div>
+		                </div>
+		              </div>
+		              <div class="sl-item">
+		                <div class="sl-left">
+		                  <img src="<?php echo base_url()?>assets/flatkit/assets/images/a8.jpg" class="img-circle">
+		                </div>
+		                <div class="sl-content">
+		                  <a href class="text-info">Walter Paler</a><span class="m-l-sm sl-date">1 hour ago</span>
+		                  <div>was added to Repo</div>
+		                </div>
+		              </div>
+		            </div>
+		            <a href class="btn btn-sm white rounded text-u-c m-y-xs">Load More</a>
+		  		</div>
 			</div>
+	    </div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-xl-4">
+			<div class="box">
+				<div class="box-header">
+					<h3>Messages</h3>
+				</div>
+				<ul class="list-group no-border">
+			        <li class="list-group-item">
+			          <a href="" class="pull-left w-40 m-r"><img src="<?php echo base_url()?>assets/flatkit/assets/images/a1.jpg" class="img-responsive img-circle"></a>
+			          <div class="clear">
+			            <a href="" class="_500 block">Jonathan Doe</a>
+			            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+			          </div>
+			        </li>
+			        <li class="list-group-item">
+			          <a href="" class="pull-left w-40 m-r"><img src="<?php echo base_url()?>assets/flatkit/assets/images/a2.jpg" class="img-responsive img-circle"></a>
+			          <div class="clear">
+			            <a href="" class="_500 block">Jack Michale</a>
+			            <span class="text-muted">Sectetur adipiscing elit</span>
+			          </div>
+			        </li>
+			        <li class="list-group-item">
+			          <a href="" class="pull-left w-40 m-r"><img src="<?php echo base_url()?>assets/flatkit/assets/images/a3.jpg" class="img-responsive img-circle"></a>
+			          <div class="clear">
+			            <a href="" class="_500 block">Jessi</a>
+			            <span class="text-muted">Sectetur adipiscing elit</span>
+			          </div>
+			        </li>
+			        <li class="list-group-item">
+			          <a href="" class="pull-left w-40 m-r"><img src="<?php echo base_url()?>assets/flatkit/assets/images/a4.jpg" class="img-responsive img-circle"></a>
+			          <div class="clear">
+			            <a href="" class="_500 block">Sodake</a>
+			            <span class="text-muted">Vestibulum ullamcorper sodales nisi nec condimentum</span>
+			          </div>
+			        </li>
+			    </ul>
+		    </div>
+		</div>
+		<div class="col-md-6 col-xl-4">
+	        <div class="box indigo-900 lt">
+	            <div class="box-header b-b">
+	              <h2>Latest Tweets</h2>
+	            </div>
+	            <ul class="list">
+	              <li class="list-item">
+	                <div class="list-body">
+	                  <p>Wellcome <a href class="text-info">@Drew Wllon</a> and play this web application template, have fun1 </p>
+	                  <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 minuts ago</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <div class="list-body">
+	                  <p>Morbi nec <a href class="text-info">@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
+	                  <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 1 hour ago</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <div class="list-body">                   
+	                  <p><a href class="text-info">@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam</p>
+	                  <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 hours ago</small>
+	                </div>
+	              </li>
+	            </ul>
+	        </div>
+		</div>
+		<div class="col-md-6 col-xl-4">
+			<div class="box">
+	            <div class="box-header">
+	              <h3>Feeds</h3>
+	            </div>
+	            <div class="box-divider m-a-0"></div>
+	            <ul class="list no-border">
+	              <li class="list-item">
+	                <a herf class="pull-left m-r">
+	                	<span class="w-40">
+	                  		<img src="<?php echo base_url()?>assets/flatkit/assets/images/b1.jpg" class="w-full" alt="...">
+	                 	</span>
+	                </a>
+	                <div class="clear">
+	                  <a href class="_500 text-ellipsis">The people who party before work</a>
+	                  <small class="text-muted">May 12</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="pull-left m-r">
+		                <span class="w-40">
+	                  		<img src="<?php echo base_url()?>assets/flatkit/assets/images/b2.jpg" class="w-full" alt="...">
+	                 	</span>
+	                </a>
+	                <div class="clear">
+	                  <a href class="_500 text-ellipsis">Robot steal your job</a>
+	                  <small class="text-muted">May 9, 2015</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="pull-left m-r">
+	                    <span class="w-40">
+	                  		<img src="<?php echo base_url()?>assets/flatkit/assets/images/b3.jpg" class="w-full" alt="...">
+	                 	</span>
+	                </a>
+	                <div class="clear">
+	                  <a href class="_500 text-ellipsis">Reservoir dogs and furious rabies</a>
+	                  <small class="text-muted">Jan 9, 2015</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="pull-left m-r">
+	                    <span class="w-40">
+	                  		<img src="<?php echo base_url()?>assets/flatkit/assets/images/b4.jpg" class="w-full" alt="...">
+	                 	</span>
+	                </a>
+	                <div class="clear">
+	                  <a href class="_500 text-ellipsis">Changing the world</a>
+	                  <small class="text-muted">Jan 5, 2015</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="pull-left m-r">
+	                    <span class="w-40">
+	                  		<img src="<?php echo base_url()?>assets/flatkit/assets/images/b5.jpg" class="w-full" alt="...">
+	                 	</span>
+	                </a>
+	                <div class="clear">
+	                  <a href class="_500 text-ellipsis">See stars</a>
+	                  <small class="text-muted">Jan 2, 2015</small>
+	                </div>
+	              </li>
+	            </ul>
+	        </div>
+		</div>
+	</div-->
+</div>
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
+<!-- ############ PAGE END-->
 
-		<!-- basic scripts -->
+    </div>
+  </div>
+  <!-- / -->
 
-		
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='<?php echo base_url('assets')?>/ace../js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo base_url('assets')?>/ace/js/jquery.mobile.custom.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- page specific plugin scripts -->
-
-		<!-- ace scripts -->
-<script src="<?php echo base_url('assets')?>/ace/js/jquery.table2excel.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/chosen.jquery.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/typeahead.jquery.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/jquery.maskMoney.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/bootstrap.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.typeahead.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/jquery.dataTables.js"></script>
-<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.ajax-content.js"></script>
-                <script src="<?php echo base_url('assets')?>/highcharts/js/highcharts.js"></script>
-                <script src="<?php echo base_url('assets')?>/highcharts/js/modules/data.js"></script>
-                <script src="<?php echo base_url('assets')?>/highcharts/js/modules/drilldown.js"></script>
-                
-                <script src="<?php echo base_url('assets')?>/highcharts/js/modules/series-label.js"></script>
-                <script src="<?php echo base_url('assets')?>/highcharts/js/modules/exporting.js"></script>
-                <script src="<?php echo base_url('assets')?>/highcharts/js/modules/export-data.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.scroller.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.colorpicker.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.fileinput.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.wysiwyg.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.spinner.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.treeview.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.wizard.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.aside.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.touch-drag.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.sidebar.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.sidebar-scroll-1.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.submenu-hover.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.widget-box.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.settings.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.settings-rtl.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.settings-skin.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.widget-on-reload.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.searchbox-autocomplete.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/date-time/bootstrap-datepicker.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/date-time/bootstrap-timepicker.js"></script>
-		<!--script src="<?php echo base_url('assets')?>/ace/js/select2.js"></script-->
-		<script src="<?php echo base_url('assets')?>/select2/js/select2.js"></script>
-
-		
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-                    
-                                
-			jQuery(function($) {
-				
-				$('.datatable').DataTable();
-				
-				$('.chosen-select').chosen({allow_single_deselect:true}); 
-				
-				$('#sidebar2').insertBefore('.page-content').ace_sidebar('collapse', false);
-				///toggleMenu(toggle_btn, save);
-			   $('#navbar').addClass('h-navbar');
-			   $('.footer').insertAfter('.page-content');
-			   
-			   $('.page-content').addClass('main-content');
-			   
-			   $('.menu-toggler[data-target="#sidebar2"]').insertBefore('.navbar-brand');
-			   
-			   
-			   $(document).on('settings.ace.two_menu', function(e, event_name, event_val) {
-				 if(event_name == 'sidebar_fixed') {
-					 if( $('#sidebar').hasClass('sidebar-fixed') ) $('#sidebar2').addClass('sidebar-fixed')
-					 else $('#sidebar2').removeClass('sidebar-fixed')
-				 }
-			   }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed' ,$('#sidebar').hasClass('sidebar-fixed')]);
-			   
-			   $('#sidebar2[data-sidebar-hover=true]').ace_sidebar_hover('reset');
-			   $('#sidebar2[data-sidebar-scroll=true]').ace_sidebar_scroll('reset', true);
-                           $('#tbl-kalkulasi').DataTable({
-        "language": {
-             "search": "Search Status/Tindakan:"
-        }
-        });
-		
-			})
-	
-			$('.date-picker').datepicker({
-				autoclose: true,
-                                format:'yyyy-mm-dd',
-				todayHighlight: true 
-			}).next().on(ace.click_event, function(){
-				$(this).prev().focus();
-			});
-			
-			$('.date-picker').datepicker({
-				autoclose: true,
-				todayHighlight: true,
-				<?php if($this->session->userdata('webmaster_grup')!='2706'){
-					?>
-				startDate: '<?php echo date("Y-m").'-01'?>', 
-				<?php } ?>
-				endDate: '<?php echo tanggalpenuh(date("Y-m"))?>', 
-			}).next().on(ace.click_event, function(){
-				$(this).prev().focus();
-			});
-			
-			
-				$('.timepicker').timepicker({
-					minuteStep: 1,
-					showSeconds: true,
-					showMeridian: false
-				}).next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
-			
-			
-			
-		</script>
-<script>
-				//////////////////
-				//select2
-                                
-          function matchStart(params, data) {
-            params.term = params.term || '';
-            if(data.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
-                return data;
-            }
-            return false;
-          }  
-				$('.select2').css('width','200px').select2({matcher: function(params,data){
-                                    return matchStart(params, data);
-                                },});
-                            
-        $('#select2-multiple-style .btn').on('click', function(e){
-            var target = $(this).find('input[type=radio]');
-            var which = parseInt(target.val());
-            if(which == 2) $('.select2').addClass('tag-input-style');
-            else $('.select2').removeClass('tag-input-style');
-	});
-                                
-				
-				//////////////////
-	///////////////////
-	
-	//typeahead.js
-	//example taken from plugin's page at: https://twitter.github.io/typeahead.js/examples/
-	var substringMatcher = function(strs) {
-		return function findMatches(q, cb) {
-			var matches, substringRegex;
-			
-			// an array that will be populated with substring matches
-			matches = [];
-			
-			// regex used to determine if a string contains the substring `q`
-			substrRegex = new RegExp(q, 'i');
-			
-			// iterate through the pool of strings and for any string that
-			// contains the substring `q`, add it to the `matches` array
-			$.each(strs, function(i, str) {
-				if (substrRegex.test(str)) {
-					// the typeahead jQuery plugin expects suggestions to a
-					// JavaScript object, refer to typeahead docs for more info
-					matches.push({ value: str });
-				}
-			});
-			
-			cb(matches);
-		}
-	}
-	
-	
-	
-	///////////////
-	
-	$('input.typeaheadtruck').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-		}, {
-		name: 'states',
-		displayKey: 'value',
-		source: substringMatcher(ace.vars['TRUCK'])
-	});
-	$('input.typeaheadsea').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-		}, {
-		name: 'states',
-		displayKey: 'value',
-		source: substringMatcher(ace.vars['SEA'])
-		});
-	$('input.typeaheadair').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-		}, {
-		name: 'states',
-		displayKey: 'value',
-		source: substringMatcher(ace.vars['AIR'])
-	}); 
-</script>
-<script>
-  $(function() {
-    $('.currency').maskMoney({thousands:".",decimal:",",precision:0});
-  });
-  
-  // Jquery Dependency
-
-$("input[data-type='currency']").on({
-    keyup: function() {
-      formatCurrency($(this));
-    },
-    blur: function() { 
-      formatCurrency($(this), "blur");
-    }
-});
-
-
-function formatNumber(n) {
-  // format number 1000000 to 1,234,567
-  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
-
-
-function formatCurrency(input, blur) {
-  // appends $ to value, validates decimal side
-  // and puts cursor back in right position.
-  
-  // get input value
-  var input_val = input.val();
-  
-  // don't validate empty input
-  if (input_val === "") { return; }
-  
-  // original length
-  var original_len = input_val.length;
-
-  // initial caret position 
-  var caret_pos = input.prop("selectionStart");
+  <!-- theme switcher -->
+  <!--<div id="switcher">
+    <div class="switcher box-color dark-white text-color" id="sw-theme">
+      <a href ui-toggle-class="active" target="#sw-theme" class="box-color dark-white text-color sw-btn">
+        <i class="fa fa-gear"></i>
+      </a>
+      <div class="box-header">
+        <a href="https://themeforest.net/item/flatkit-app-ui-kit/13231484?ref=flatfull" class="btn btn-xs rounded danger pull-right">BUY</a>
+        <h2>Theme Switcher</h2>
+      </div>
+      <div class="box-divider"></div>
+      <div class="box-body">
+        <p class="hidden-md-down">
+          <label class="md-check m-y-xs"  data-target="folded">
+            <input type="checkbox">
+            <i class="green"></i>
+            <span class="hidden-folded">Folded Aside</span>
+          </label>
+          <label class="md-check m-y-xs" data-target="boxed">
+            <input type="checkbox">
+            <i class="green"></i>
+            <span class="hidden-folded">Boxed Layout</span>
+          </label>
+          <label class="m-y-xs pointer" ui-fullscreen>
+            <span class="fa fa-expand fa-fw m-r-xs"></span>
+            <span>Fullscreen Mode</span>
+          </label>
+        </p>
+        <p>Colors:</p>
+        <p data-target="themeID">
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'primary', accent:'accent', warn:'warn'}">
+            <input type="radio" name="color" value="1">
+            <i class="primary"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'accent', accent:'cyan', warn:'warn'}">
+            <input type="radio" name="color" value="2">
+            <i class="accent"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warn', accent:'light-blue', warn:'warning'}">
+            <input type="radio" name="color" value="3">
+            <i class="warn"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'success', accent:'teal', warn:'lime'}">
+            <input type="radio" name="color" value="4">
+            <i class="success"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'info', accent:'light-blue', warn:'success'}">
+            <input type="radio" name="color" value="5">
+            <i class="info"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'blue', accent:'indigo', warn:'primary'}">
+            <input type="radio" name="color" value="6">
+            <i class="blue"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warning', accent:'grey-100', warn:'success'}">
+            <input type="radio" name="color" value="7">
+            <i class="warning"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md" data-value="{primary:'danger', accent:'grey-100', warn:'grey-300'}">
+            <input type="radio" name="color" value="8">
+            <i class="danger"></i>
+          </label>
+        </p>
+        <p>Themes:</p>
+        <div data-target="bg" class="text-u-c text-center _600 clearfix">
+          <label class="p-a col-xs-6 light pointer m-a-0">
+            <input type="radio" name="theme" value="" hidden>
+            Light
+          </label>
+          <label class="p-a col-xs-6 grey pointer m-a-0">
+            <input type="radio" name="theme" value="grey" hidden>
+            Grey
+          </label>
+          <label class="p-a col-xs-6 dark pointer m-a-0">
+            <input type="radio" name="theme" value="dark" hidden>
+            Dark
+          </label>
+          <label class="p-a col-xs-6 black pointer m-a-0">
+            <input type="radio" name="theme" value="black" hidden>
+            Black
+          </label>
+        </div>
+      </div>
+    </div>
     
-  // check for decimal
-  if (input_val.indexOf(",") >= 0) {
+    <div class="switcher box-color black lt" id="sw-demo">
+      <a href ui-toggle-class="active" target="#sw-demo" class="box-color black lt text-color sw-btn">
+        <i class="fa fa-list text-white"></i>
+      </a>
+      <div class="box-header">
+        <h2>Demos</h2>
+      </div>
+      <div class="box-divider"></div>
+      <div class="box-body">
+        <div class="text-u-c text-center _600 clearfix">
+          <a href="dashboard.html"
+            class="p-a col-xs-6 primary">
+            <span class="text-white">Default</span>
+          </a>
+          <a href="main.php.html"
+            class="p-a col-xs-6 success">
+            <span class="text-white">Zero</span>
+          </a>
+          <a href="dashboard.1.html"
+            class="p-a col-xs-6 blue">
+            <span class="text-white">One</span>
+          </a>
+          <a href="dashboard.2.html"
+            class="p-a col-xs-6 warn">
+            <span class="text-white">Two</span>
+          </a>
+          <a href="dashboard.3.html"
+            class="p-a col-xs-6 danger">
+            <span class="text-white">Three</span>
+          </a>
+          <a href="dashboard.4.html"
+            class="p-a col-xs-6 green">
+            <span class="text-white">Four</span>
+          </a>
+          <a href="dashboard.5.html"
+            class="p-a col-xs-6 info">
+            <span class="text-white">Five</span>
+          </a>
+          <div 
+            class="p-a col-xs-6 lter">
+            <span class="text">...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / -->
 
-    // get position of first decimal
-    // this prevents multiple decimals from
-    // being entered
-    var decimal_pos = input_val.indexOf(",");
+<!-- ############ LAYOUT END-->
 
-    // split number by decimal point
-    var left_side = input_val.substring(0, decimal_pos);
-    var right_side = input_val.substring(decimal_pos);
+  </div>
+<!-- build:js <?php echo base_url()?>assets/flatkit/scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jquery/dist/jquery.js"></script>
+<!-- Bootstrap -->
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/PACE/pace.min.js"></script>
 
-    // add commas to left side of number
-    left_side = formatNumber(left_side);
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/config.lazyload.js"></script>
 
-    // validate right side
-    right_side = formatNumber(right_side);
-    
-    // On blur make sure 2 numbers after decimal
-    if (blur === "blur") {
-      right_side += "00";
-    }
-    
-    // Limit decimal to only 2 digits
-    right_side = right_side.substring(0, 2);
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/palette.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-load.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-jp.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-include.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-device.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-form.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-nav.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-screenfull.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-scroll-to.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ui-toggle-class.js"></script>
 
-    // join number by .
-    input_val = "Rp " + left_side + "," + right_side;
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/app.js"></script>
 
-  } else {
-    // no decimal entered
-    // add commas to number
-    // remove all non-digits
-    input_val = formatNumber(input_val);
-    input_val = "Rp " + input_val;
-    
-    // final formatting
-    if (blur === "blur" && input_val!="Rp ") {
-      input_val += ",00";
-    }
-    else if(blur === "blur" && input_val=="Rp ") {
-        input_val="";
-    }
-  }
-  
-  // send updated string to input
-  input.val(input_val);
-
-  // put caret back in the right position
-  var updated_len = input_val.length;
-  caret_pos = updated_len - original_len + caret_pos;
-  input[0].setSelectionRange(caret_pos, caret_pos);
-}
-const formatter = new Intl.NumberFormat('id', {
-  style: 'decimal',
-  //currency: 'IDR',
-  minimumFractionDigits: 0
-})
-
-function CurrencyFormatted(amount)
-{
-    var i = parseFloat(amount);
-    if(isNaN(i)) { i = 0; }
-    var minus = '';
-    if(i < 0) { minus = '-'; }
-    i = Math.abs(i);
-    i = parseInt((i + .005) * 100);
-    i = i / 100;
-    s = new String(i);
-    if(s.indexOf('.') < 0) { s += ''; }
-    if(s.indexOf('.') == (s.length - 2)) { s += '0'; }
-    s = minus + s;
-    return s;
-}
-</script>
-		<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-		<link rel="stylesheet" href="<?php echo base_url('assets')?>/ace/css/ace.onpage-help.css" />
-		<link rel="stylesheet" href="<?php echo base_url('assets')?>/ace/docs/js/themes/sunburst.css" />
-
-		<script type="text/javascript"> ace.vars['base'] = '..'; </script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/elements.onpage-help.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/js/ace/ace.onpage-help.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/docs/js/rainbow.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/docs/js/language/generic.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/docs/js/language/html.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/docs/js/language/css.js"></script>
-		<script src="<?php echo base_url('assets')?>/ace/docs/js/language/javascript.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>assets/flexigrid/js/flexigrid.pack.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>assets/validate_new/validate.js"></script>
-                <link rel="stylesheet" href="<?php echo base_url();?>assets/validate_new/validate.css"/>
-	</body>
+  <!-- ajax -->
+  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+  <script src="<?php echo base_url()?>assets/flatkit/scripts/ajax.js"></script>
+<!-- endbuild -->
+</body>
 </html>
