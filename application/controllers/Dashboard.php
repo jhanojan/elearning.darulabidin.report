@@ -25,6 +25,12 @@ class Dashboard extends CI_Controller {
             
 		//Set Global
 		//$data = GetHeaderFooter();
+                $this->param=array();
+                $req = _request('tes',$this->param);
+                //echo $req->api_name;
+                //print_r($req);
+                //die();
+                $data['api_tes']=$req;
 		$data['content'] = 'contents/'.$this->utama.'/view';
 		//End Global
 		

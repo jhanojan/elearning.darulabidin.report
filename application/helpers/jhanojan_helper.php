@@ -2450,4 +2450,23 @@ function ambil_bulan_tahun_ajaran($p=null,$t=null){
     }
     
 }
+function _request($url,$param,$type='get')
+    {
+        $CI=&get_instance();
+        $config = array('server' => $CI->config->item('rest_server'));
+
+        $CI->rest->initialize($config);
+
+        if($type == "get")
+        {
+            $req = $CI->rest->get($url,$param);
+        }
+        else
+        {
+            $req = $CI->rest->post($url,$param);
+        }
+
+        return $req;
+
+    }
 ?>

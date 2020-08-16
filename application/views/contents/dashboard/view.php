@@ -2,5 +2,6 @@
     <div class="well-lg">
         <h3>Selamat Datang</h3>
     </div>
+    <?php echo $api_tes->api_name;?>
     
 </div>
