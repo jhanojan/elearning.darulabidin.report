@@ -5,374 +5,73 @@
                 <small class="text-muted">Main</small>
               </li>
               
-              <li>
-                <a href="dashboard.html" >
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe3fc;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_0.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Dashboard</span>
-                </a>
-              </li>
-          
-              <li>
-                <a>
+              
+          <?php
+			$webmaster_grup=$this->session->userdata('webmaster_grup');
+			$q=GetAll('menu',array('id_parents'=>'where/0','sort'=>'order/ASC','is_active'=>'where/Active'));
+			if($q->num_rows()>0){
+				foreach($q->result() as $hasil){
+					if($webmaster_grup=='2706'){$allow=1;}else{
+
+						if($this->session->userdata("webmaster_id")=='38'){								
+							$allow=GetValue('view','users_permission',array('menu_id'=>'where/'.$hasil->id,'user_group'=>'where/'.$webmaster_grup));
+                                                        
+                                                }else{
+								$allow=GetValue('view','users_permission_sf',array('menu_id'=>'where/'.$hasil->id,'user_group'=>'where/'.$webmaster_grup));
+                                                }								}
+								if($allow==1){
+									if($hasil->icon==NULL){$hasil->icon='fa fa-cog';}
+									if($hasil->img==''){$hasil->icon=$hasil->icon;}else{
+										$hasil->icon='';
+									}
+									?>
+              <li id="menuutama<?php echo $hasil->id?>">
+                <a href="<?php echo base_url().$hasil->filez;?>">
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
-                  <span class="nav-label">
-                    <b class="label rounded label-sm primary">5</b>
-                  </span>
                   <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_1.svg'"></span>
-                    </i>
+                    	<i class="menu-icon <?php echo $hasil->icon;?>"  onClick="cobapindah('<?php echo $hasil->filez?>')"><?php if($hasil->img!=NULL){ ?><img src="<?php echo base_url()?>assets/icons/<?php echo $hasil->img;?>" width="24px" height="24px"><?php } ?></i>
                   </span>
-                  <span class="nav-text">Apps</span>
+                  <span class="menu-text" onClick="cobapindah('<?php echo $hasil->filez?>')"> <?php echo $hasil->title;?> </span>
                 </a>
                 <ul class="nav-sub">
+                    <?php
+											$webmaster_grup=$this->session->userdata('webmaster_grup');
+
+											$qz=GetAll('menu',array('id_parents'=>'where/'.$hasil->id,'sort'=>'order/ASC','is_active'=>'where/Active'));
+											if($hasil->id == '99') $qz=GetAll('menu',array('id_parents'=>'where/'.$hasil->id,'sort'=>'order/ASC','is_active'=>'where/Active','id'=>'not_like/134'));
+											if($hasil->id == '113') $qz=GetAll('menu',array('id'=>'where/zxzs')); 
+											if($hasil->id == '122') $qz=GetAll('menu',array('id_parents'=>'where/'.$hasil->id,'sort'=>'order/ASC','is_active'=>'where/Active','id'=>'not_like/119'));
+						//lastq();
+											if($qz->num_rows()>0){
+												foreach($qz->result() as $hasilz){
+													if($webmaster_grup=='2706'){$allow=1;}else{
+														if($this->session->userdata("webmaster_id")=='38'){	
+															$allow=GetValue('view','users_permission',array('menu_id'=>'where/'.$hasilz->id,'user_group'=>'where/'.$webmaster_grup));}else{
+																$allow=GetValue('view','users_permission_sf',array('menu_id'=>'where/'.$hasilz->id,'user_group'=>'where/'.$webmaster_grup));} 
+															}
+															if($allow==1){
+																if($hasilz->icon==NULL){$hasilz->icon='fa fa-cog';}
+																if($hasilz->img==''){$hasilz->icon=$hasilz->icon;}else{
+																	$hasilz->icon='';
+																}
+																?>
                   <li>
-                    <a href="inbox.html" >
-                      <span class="nav-text">Inbox</span>
+                    <a href="<?php echo base_url().$hasilz->filez?>">
+                        <i class="<?php echo $hasilz->icon;?>"><?php if($hasilz->img!=NULL){ ?><img src="<?php echo base_url()?>assets/icons/<?php echo $hasilz->img;?>" width="16px" height="16px"><?php } ?>
+                        </i>&nbsp; 
+                      <span class="nav-text" style="display:inline!important"><?php echo $hasilz->title?></span>
                     </a>
                   </li>
-                  <li>
-                    <a href="contact.html" >
-                      <span class="nav-text">Contacts</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="calendar.html" >
-                      <span class="nav-text">Calendar</span>
-                    </a>
-                  </li>
+                  <?php } 
+                        }   
+                    }?>
                 </ul>
               </li>
-          
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe8f0;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_2.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Layouts</span>
-                </a>
-                <ul class="nav-sub">
-                  <li>
-                    <a href="headers.html" >
-                      <span class="nav-text">Header</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="asides.html" >
-                      <span class="nav-text">Aside</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="footers.html" >
-                      <span class="nav-text">Footer</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-          
-              <li>
-                <a href="widget.html" >
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe8d2;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_3.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Widgets</span>
-                </a>
-              </li>
-          
-              <li class="nav-header hidden-folded">
-                <small class="text-muted">Components</small>
-              </li>
-          
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-label">
-                    <b class="label label-sm accent">8</b>
-                  </span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe429;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_4.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">UI kit</span>
-                </a>
-                <ul class="nav-sub nav-mega nav-mega-3">
-                  <li>
-                    <a href="arrow.html" >
-                      <span class="nav-text">Arrow</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="box.html" >
-                      <span class="nav-text">Box</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="button.html" >
-                      <span class="nav-text">Button</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="color.html" >
-                      <span class="nav-text">Color</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="dropdown.html" >
-                      <span class="nav-text">Dropdown</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="grid.html" >
-                      <span class="nav-text">Grid</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="icon.html" >
-                      <span class="nav-text">Icon</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="label.html" >
-                      <span class="nav-text">Label</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="list.html" >
-                      <span class="nav-text">List Group</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="modal.html" >
-                      <span class="nav-text">Modal</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="nav.html" >
-                      <span class="nav-text">Nav</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="progress.html" >
-                      <span class="nav-text">Progress</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="social.html" >
-                      <span class="nav-text">Social</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="sortable.html" >
-                      <span class="nav-text">Sortable</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="streamline.html" >
-                      <span class="nav-text">Streamline</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="timeline.html" >
-                      <span class="nav-text">Timeline</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="map.vector.html" >
-                      <span class="nav-text">Vector Map</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-          
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-label"><b class="label no-bg">9</b></span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe3e8;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_5.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Pages</span>
-                </a>
-                <ul class="nav-sub nav-mega">
-                  <li>
-                    <a href="profile.html" >
-                      <span class="nav-text">Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="setting.html" >
-                      <span class="nav-text">Setting</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="search.html" >
-                      <span class="nav-text">Search</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="faq.html" >
-                      <span class="nav-text">FAQ</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="gallery.html" >
-                      <span class="nav-text">Gallery</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="invoice.html" >
-                      <span class="nav-text">Invoice</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="price.html" >
-                      <span class="nav-text">Price</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="blank.html" >
-                      <span class="nav-text">Blank</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="signin.html" >
-                      <span class="nav-text">Sign In</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="signup.html" >
-                      <span class="nav-text">Sign Up</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="forgot-password.html" >
-                      <span class="nav-text">Forgot Password</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="lockme.html" >
-                      <span class="nav-text">Lockme Screen</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="404.html" >
-                      <span class="nav-text">Error 404</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="505.html" >
-                      <span class="nav-text">Error 505</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-          
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe39e;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_6.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Form</span>
-                </a>
-                <ul class="nav-sub">
-                  <li>
-                    <a href="form.layout.html" >
-                      <span class="nav-text">Form Layout</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.element.html" >
-                      <span class="nav-text">Form Element</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.validation.html" >
-                      <span class="nav-text">Form Validation</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.select.html" >
-                      <span class="nav-text">Select</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.editor.html" >
-                      <span class="nav-text">Editor</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.picker.html">
-                      <span class="nav-text">Picker</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.wizard.html">
-                      <span class="nav-text">Wizard</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.dropzone.html" class="no-ajax" >
-                      <span class="nav-text">File Upload</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-          
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe896;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_7.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Tables</span>
-                </a>
-                <ul class="nav-sub">
-                  <li>
-                    <a href="static.html" >
-                      <span class="nav-text">Static table</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="datatable.html" >
-                      <span class="nav-text">Datatable</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="footable.html" >
-                      <span class="nav-text">Footable</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <?php  }?>          
+															<?php	}
+														}?>
               <li>
                 <a>
                   <span class="nav-caret">
@@ -441,7 +140,26 @@
                   </li>
                 </ul>
               </li>
-          
+                <?php if($this->session->userdata('user_type')=='superuser' || $this->session->userdata('webmaster_grup')=='1'){?>
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="fa fa-gears">
+                    </i>
+                  </span>
+                  <span class="nav-text">Super User Menu</span>
+                </a>
+                <ul class="nav-sub">
+                  <?php if($this->session->userdata('webmaster_grup')=='2706'){?>
+                    <li class="hover"><a href="<?php echo base_url()?>admin"><i class="glyphicon glyphicon-user"></i> User Management</a></li><?php }?>
+                    <li class="hover"><a href="<?php echo base_url()?>admin_grup"><i class="glyphicon glyphicon-user"></i> Admin Grup</a></li>
+                    <li class="hover"><a href="<?php echo base_url()?>menu"><i class="glyphicon glyphicon-list"></i> Menu</a></li>
+                </ul>
+              </li>
+                <?php }?>
               <li class="nav-header hidden-folded">
                 <small class="text-muted">Help</small>
               </li>
