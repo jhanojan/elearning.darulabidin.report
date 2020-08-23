@@ -72,74 +72,7 @@
               <?php  }?>          
 															<?php	}
 														}?>
-              <li>
-                <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                  <span class="nav-label hidden-folded">
-                    <b class="label label-sm info">N</b>
-                  </span>
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe1b8;
-                      <span ui-include="'<?php echo base_url()?>assets/flatkit/assets/images/i_8.svg'"></span>
-                    </i>
-                  </span>
-                  <span class="nav-text">Charts</span>
-                </a>
-                <ul class="nav-sub">
-                  <li>
-                    <a href="chart.html" >
-                      <span class="nav-text">Chart</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="nav-caret">
-                        <i class="fa fa-caret-down"></i>
-                      </span>
-                      <span class="nav-text">Echarts</span>
-                    </a>
-                    <ul class="nav-sub">
-                      <li>
-                        <a href="echarts-line.html" >
-                          <span class="nav-text">line</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-bar.html" >
-                          <span class="nav-text">Bar</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-pie.html" >
-                          <span class="nav-text">Pie</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-scatter.html" >
-                          <span class="nav-text">Scatter</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-radar-chord.html" >
-                          <span class="nav-text">Radar &amp; Chord</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-gauge-funnel.html" >
-                          <span class="nav-text">Gauges &amp; Funnel</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="echarts-map.html" >
-                          <span class="nav-text">Map</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+              
                 <?php if($this->session->userdata('user_type')=='superuser' || $this->session->userdata('webmaster_grup')=='1'){?>
               <li>
                 <a>
@@ -160,15 +93,7 @@
                 </ul>
               </li>
                 <?php }?>
-              <li class="nav-header hidden-folded">
-                <small class="text-muted">Help</small>
-              </li>
               
-              <li class="hidden-folded" >
-                <a href="docs.html" >
-                  <span class="nav-text">Documents</span>
-                </a>
-              </li>
           
             </ul>
         </nav>

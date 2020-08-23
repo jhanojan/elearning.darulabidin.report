@@ -98,10 +98,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => '202.159.121.198',
 	'username' => 'root',
-	'password' => '',
-	'database' => 'ojanapps_v2',
+	'password' => '*AqnDB123#',
+	'database' => 'ojanapps_v3',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'sv_',
 	'pconnect' => TRUE,
