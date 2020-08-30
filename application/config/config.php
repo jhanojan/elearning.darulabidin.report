@@ -526,4 +526,5 @@ $config['proxy_ips'] = '';
  * REST SERVER
  * ---------------------------------------------------------------------
  */
-$config['rest_server'] = 'http://202.159.121.198:9092';
+//$config['rest_server'] = 'http://202.159.121.198:9092';
+$config['rest_server'] = 'http://api.darulabidin.com';

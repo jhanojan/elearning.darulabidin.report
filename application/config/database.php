@@ -95,13 +95,34 @@ $query_builder = TRUE;
 //	'save_queries' => TRUE
 //);
 
-
+//
+//$db['default'] = array(
+//	'dsn'	=> '',
+//	'hostname' => '202.159.121.198',
+//	'username' => 'root',
+//	'password' => '*AqnDB123#',
+//	'database' => 'ojanapps_v3',
+//	'dbdriver' => 'mysqli',
+//	'dbprefix' => 'sv_',
+//	'pconnect' => TRUE,
+//	'db_debug' => (ENVIRONMENT !== 'production'),
+//	'cache_on' => FALSE,
+//	'cachedir' => '',
+//	'char_set' => 'utf8',
+//	'dbcollat' => 'utf8_general_ci',
+//	'swap_pre' => '',
+//	'encrypt' => FALSE,
+//	'compress' => FALSE,
+//	'stricton' => FALSE,
+//	'failover' => array(),
+//	'save_queries' => TRUE
+//);
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '202.159.121.198',
-	'username' => 'root',
-	'password' => '*AqnDB123#',
-	'database' => 'ojanapps_v3',
+	'hostname' => 'darulabidin.com',
+	'username' => 'darulabi_e_learning_reporting',
+	'password' => '@wA+PCj(#Ie@',
+	'database' => 'darulabi_elearning_report',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'sv_',
 	'pconnect' => TRUE,
