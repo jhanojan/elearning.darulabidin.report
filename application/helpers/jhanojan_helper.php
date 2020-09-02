@@ -2222,6 +2222,11 @@ function webmastermarketing(){
 	$group = $CI->session->userdata('webmaster_marketing');
 	return $group;
 }
+function webmasterid(){
+	$CI=&get_instance();
+	$group = $CI->session->userdata('webmaster_id');
+	return $group;
+}
 function getkurs($id){
 	
 	$CI=&get_instance();

@@ -26,14 +26,15 @@
 									}
 									?>
               <li id="menuutama<?php echo $hasil->id?>">
-                <a href="<?php echo base_url().$hasil->filez;?>">
+                  
+                <a href="<?php echo ($hasil->filez=='#'? '#':base_url().$hasil->filez);?>">
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
                   <span class="nav-icon">
-                    	<i class="menu-icon <?php echo $hasil->icon;?>"  onClick="cobapindah('<?php echo $hasil->filez?>')"><?php if($hasil->img!=NULL){ ?><img src="<?php echo base_url()?>assets/icons/<?php echo $hasil->img;?>" width="24px" height="24px"><?php } ?></i>
+                    	<i class="menu-icon <?php echo $hasil->icon;?>" ><?php if($hasil->img!=NULL){ ?><img src="<?php echo base_url()?>assets/icons/<?php echo $hasil->img;?>" width="24px" height="24px"><?php } ?></i>
                   </span>
-                  <span class="menu-text" onClick="cobapindah('<?php echo $hasil->filez?>')"> <?php echo $hasil->title;?> </span>
+                  <span class="menu-text" > <?php echo $hasil->title;?> </span>
                 </a>
                 <ul class="nav-sub">
                     <?php

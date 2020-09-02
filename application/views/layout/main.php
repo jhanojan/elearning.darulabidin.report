@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Daarul Abiddin E-Learning</title>
   <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- for ios 7 style, multi-resolution icon of 152x152 -->
@@ -16,18 +16,14 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" sizes="196x196" href="<?php echo base_url()?>assets/flatkit/assets/images/logo.png">
   
-  <!-- style -->
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/animate.css/animate.min.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/glyphicons/glyphicons.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/material-design-icons/material-design-icons.css" type="text/css" />
+  <?php $this->load->view('layout/style')?>
+<!-- jQuery -->
+  <!--script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jquery/dist/jquery.js"></script-->
 
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
-  <!-- build:css <?php echo base_url()?>assets/flatkit/assets/styles/app.min.css -->
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/styles/app.css" type="text/css" />
-  <!-- endbuild -->
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/flatkit/assets/styles/font.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/style/my_style.css" type="text/css" />
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="app" id="app">
@@ -141,8 +137,6 @@
 
   </div>
 <!-- build:js <?php echo base_url()?>assets/flatkit/scripts/app.html.js -->
-<!-- jQuery -->
-  <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jquery/dist/jquery.js"></script>
 <!-- Bootstrap -->
   <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/tether/dist/js/tether.min.js"></script>
   <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -169,6 +163,25 @@
   <!-- ajax -->
   <script src="<?php echo base_url()?>assets/flatkit/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
   <script src="<?php echo base_url()?>assets/flatkit/scripts/ajax.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/flexigrid/js/flexigrid.pack.js"></script>
+  <script src="<?php echo base_url('assets')?>/ace/js/date-time/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url('assets')?>/ace/js/date-time/bootstrap-timepicker.js"></script>
+  <script src="<?php echo base_url('assets')?>/select2/js/select2.js"></script>
+  <script>
+      $('.date-picker').datepicker({
+				autoclose: true,
+                                format:'yyyy-mm-dd',
+				todayHighlight: true 
+			});
+			
+			
+				$('.timepicker').timepicker({
+					minuteStep: 1,
+					showSeconds: true,
+					showMeridian: false
+				});
+  </script>
 <!-- endbuild -->
 </body>
 </html>
+<?php $this->output->delete_cache();?>

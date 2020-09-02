@@ -1,4 +1,15 @@
+// base url
+function base_url() {
+    var pathparts = location.pathname.split('/');
+    if (location.host == 'localhost') {
+        var url = location.origin+'/'+pathparts[1].trim('/')+'/'; // http://localhost/myproject/
+    }else{
+        var url = location.origin; // http://stackoverflow.com
+    }
+    return url;
+}
 // lazyload config
+
 var MODULE_CONFIG = {
     easyPieChart:   [ 'assets/flatkit/libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js' ],
     sparkline:      [ 'assets/flatkit/libs/jquery/jquery.sparkline/dist/jquery.sparkline.retina.js' ],
@@ -21,7 +32,7 @@ var MODULE_CONFIG = {
                       'assets/flatkit/libs/jquery/footable/css/footable.core.css'
                     ],
     screenfull:     [
-                      'assets/flatkit/libs/jquery/screenfull/dist/screenfull.min.js'
+                      base_url()+'assets/flatkit/libs/jquery/screenfull/dist/screenfull.min.js'
                     ],
     sortable:       [
                       'assets/flatkit/libs/jquery/html.sortable/dist/html.sortable.min.js'
