@@ -1,5 +1,5 @@
 <?php 
-class session_visitor extends CI_Model{
+class Session_visitor extends CI_Model{
 	function ceksesicookie(){
 		
 	$userinfo=getBrowserOS();
