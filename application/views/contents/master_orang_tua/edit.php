@@ -194,10 +194,10 @@ if(isset($list)){
                         $child=GetAll('sv_parent_child',array('parent'=>'where/'.$val['id']));
                             if($child->num_rows()>0){
                                 foreach($child->result_array() as $anaks){
-                                    $detailanak=$this->mdlfo->query("SELECT firstname,lastname FROM mdlfo_user WHERE id='$anaks'")->row_array();
+                                    $detailanak=$this->mdlfo->query("SELECT id,firstname,lastname FROM mdlfo_user WHERE id='$anaks'")->row();
                         ?>
                             <div class="row">
-                                <div class="col-md-6"><?php echo $detailanak['lastname'].' ('.$detailanak['firstname'].')' ?></div><div class="col-md-3"><button onclick="hapusanak(<?php echo $anaks['id'] ?>)">Hapus</button></div>
+                                <div class="col-md-6"><?php echo $detailanak->lastname.' ('.$detailanak->firstname.')' ?></div><div class="col-md-3"><button onclick="hapusanak(<?php echo $anaks->id ?>)">Hapus</button></div>
                             </div>
                        <?php 
                                 }
