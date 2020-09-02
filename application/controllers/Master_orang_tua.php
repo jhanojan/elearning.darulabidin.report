@@ -17,6 +17,8 @@ class Master_orang_tua extends CI_Controller {
                 error_reporting(0);
 		parent::__construct();
                 izin();
+                
+                $this->mdlfo=$this->load->database('mdb',TRUE);
 		$this->load->library('flexigrid');
                 $this->load->helper('flexigrid');
 	}
@@ -171,7 +173,6 @@ class Master_orang_tua extends CI_Controller {
 	
 	function form($id=null){
 		
-                $this->mdlfo=$this->load->database('mdb',TRUE);
 		izin('c');
 		if($id!=NULL){
 			$filter=array('id'=>'where/'.$id);
@@ -311,7 +312,6 @@ class Master_orang_tua extends CI_Controller {
             $this->load->view('contents/master_orang_tua/opt_siswa',$data);
         }
         function searchsis(){
-            $this->mdlfo=$this->load->database('mdb',TRUE);
             $cari=$this->input->get('q');
             if(!empty($cari)){
             
